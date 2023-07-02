@@ -33,4 +33,12 @@ public class ProductController {
         log.info("Successfully retrieved all products.");
         return products;
     }
+
+    @GetMapping("/product/{id}")
+    public Product findById(@PathVariable long id){
+        log.info("Initializing findById flow.");
+        Product product = productService.findById(id);
+        log.info("Successfully retrieved product with id {}", id);
+        return product;
+    }
 }
