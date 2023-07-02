@@ -58,11 +58,11 @@ public class ProductController {
         log.info("Product updated successfully.");
     }
 
-    @GetMapping("/products")
-    public void getProductsPriceGraterThan(@RequestParam int price){
+    @GetMapping("/products-by-price")
+    public List<Product> getProductsPriceGraterThan(@RequestParam int price){
         log.info("Initializing get products with price greater than flow.");
-        productService.getProductsWithPriceGraterThan(price);
+        List<Product> products = productService.getProductsWithPriceGraterThan(price);
         log.info("Products retrieved successfully.");
-
+        return products;
     }
 }
