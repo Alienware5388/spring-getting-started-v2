@@ -51,9 +51,18 @@ public class ProductController {
     }
 
     @PutMapping("/product")
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public void updateProduct(@RequestBody Product p){
         log.info("Initializing update product flow.");
         productService.updateProduct(p);
         log.info("Product updated successfully.");
+    }
+
+    @GetMapping("/products")
+    public void getProductsPriceGraterThan(@RequestParam int price){
+        log.info("Initializing get products with price greater than flow.");
+        productService.getProductsWithPriceGraterThan(price);
+        log.info("Products retrieved successfully.");
+
     }
 }

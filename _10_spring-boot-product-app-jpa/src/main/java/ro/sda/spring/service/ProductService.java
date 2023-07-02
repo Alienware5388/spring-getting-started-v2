@@ -52,6 +52,16 @@ public class ProductService {
         // Product p with this id is already in the database and as long as the ids are the same,
         // we overwrite the initial column values with the values that came from the controller
         productRepository.save(p);
-
     }
+
+    public List<Product> getProductsWithPriceGraterThan(int price){
+        log.info("Attempting to find products with price greater or equal than {}", price);
+        return productRepository.findProductsByPriceGreaterThanEqual(price);
+    }
+
+    public List<Product> getProductsWithPriceSmallerThan(){
+        // todo
+        return null;
+    }
+
 }
