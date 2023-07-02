@@ -39,4 +39,19 @@ public class ProductService {
         }
         throw new ProductAppException("Product not found!");
     }
+
+    public void deleteById(long id){
+        productRepository.deleteById(id);
+        log.info("Product with id {} has been deleted.", id);
+    }
+
+    public void updateProduct(Product p){
+        log.info("Attempting to find product with id {}", p.getId());
+        // we use this to check if the product with this id exists (if not exists this method will throw an exception)
+        findById(p.getId());
+        // Product p with this id is already in the database and as long as the ids are the same,
+        // we overwrite the initial column values with the values that came from the controller
+        productRepository.save(p);
+
+    }
 }

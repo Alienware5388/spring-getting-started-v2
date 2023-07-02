@@ -41,4 +41,19 @@ public class ProductController {
         log.info("Successfully retrieved product with id {}", id);
         return product;
     }
+
+    @DeleteMapping("/product/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteById(@PathVariable long id){
+        log.info("Initializing deleteById flow.");
+        productService.deleteById(id);
+        log.info("Product deleted successfully.");
+    }
+
+    @PutMapping("/product")
+    public void updateProduct(@RequestBody Product p){
+        log.info("Initializing update product flow.");
+        productService.updateProduct(p);
+        log.info("Product updated successfully.");
+    }
 }
