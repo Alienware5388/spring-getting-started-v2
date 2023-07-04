@@ -28,4 +28,11 @@ public class AppExceptionHandler {
         return new ClientError(LocalDateTime.now(), ex.getMessage(), HttpStatus.NOT_FOUND.value());
     }
 
+    @ExceptionHandler(value = RuntimeException.class)
+    @ResponseStatus(HttpStatus.FOUND)
+    public ClientError handleRuntimeException(RuntimeException ex){
+        log.warn("An exception occurred with message: {}", ex.getMessage());
+        return new ClientError(LocalDateTime.now(), ex.getMessage(), HttpStatus.FOUND.value());
+    }
+
 }

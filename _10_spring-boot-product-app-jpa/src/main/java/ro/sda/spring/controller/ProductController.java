@@ -74,11 +74,5 @@ public class ProductController {
         return products;
     }
 
-//    @GetMapping("/product_with_name")
-//    public Boolean findProductByName(@RequestParam String name) {
-//
-//        log.info("Initializing get products by name flow.");
-//        return productService.findProductByName(name);
-//    }
 
 }

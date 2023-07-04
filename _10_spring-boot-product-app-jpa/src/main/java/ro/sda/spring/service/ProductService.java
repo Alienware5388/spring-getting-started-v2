@@ -20,12 +20,10 @@ public class ProductService {
     }
 
     public void addProduct(Product p) {
-        if (productRepository.findProductByName(p.getName())) {
-            log.info("A product with the same name already exists in the database");
-        } else {
-            productRepository.save(p);
-            log.info("Product added to the database.");
-        }
+        if (productRepository.findProductByName(p.getName()) != null) throw
+                new RuntimeException("A product with the same name already exists in the database !!!");
+        productRepository.save(p);
+        log.info("Product added to the database.");
     }
 
     public List<Product> findAllProducts() {
@@ -67,16 +65,5 @@ public class ProductService {
         log.info("Attempting to find products with price smaller or equal than {}", price);
         return productRepository.findProductsByPriceLessThanEqual(price);
     }
-
-//    public boolean findProductByName(String name) {
-//
-//        Optional<Product> productOptional = productRepository.findProductByName(name);
-//
-//        if (productOptional.isPresent()) {
-//            log.info("Successfully retrieved product with name {}", name);
-//            return true;
-//        }
-//        throw new ProductAppException("Product not found!");
-//    }
 
 }
