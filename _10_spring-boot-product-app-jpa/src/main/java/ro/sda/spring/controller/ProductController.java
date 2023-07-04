@@ -7,6 +7,7 @@ import ro.sda.spring.model.Product;
 import ro.sda.spring.service.ProductService;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @Slf4j
@@ -58,11 +59,28 @@ public class ProductController {
         log.info("Product updated successfully.");
     }
 
-    @GetMapping("/products-by-price")
+    @GetMapping("/products_with_price_larger_than")
     public List<Product> getProductsPriceGraterThan(@RequestParam int price){
         log.info("Initializing get products with price greater than flow.");
         List<Product> products = productService.getProductsWithPriceGraterThan(price);
         log.info("Products retrieved successfully.");
         return products;
     }
+
+    @GetMapping("/products_with_price_smaller_than")
+    public List<Product> getProductsPriceSmallerThan(@RequestParam int price){
+        log.info("Initializing get products with price smaller than flow.");
+        List<Product> products = productService.getProductsWithPriceSmallerThan(price);
+        log.info("Products retrieved successfully.");
+        return products;
+    }
+
+    @GetMapping("/product_with_name")
+    public Product findProductByName(@RequestParam String name){
+        log.info("Initializing get products by name flow.");
+        Product product = productService.findProductByName(name);
+        log.info("Products with a particular name have been retrieved successfully.");
+        return product;
+    }
+
 }

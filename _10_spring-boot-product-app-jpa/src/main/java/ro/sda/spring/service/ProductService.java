@@ -20,6 +20,9 @@ public class ProductService {
     }
 
     public void addProduct(Product p) {
+       // if(productRepository.findAll()){
+        //    log.info("A product with the same name already exists in the database");
+        //} else
         productRepository.save(p);
         log.info("Product added to the database.");
     }
@@ -59,9 +62,20 @@ public class ProductService {
         return productRepository.findProductsByPriceGreaterThanEqual(price);
     }
 
-    public List<Product> getProductsWithPriceSmallerThan(){
-        // todo
-        return null;
+    public List<Product> getProductsWithPriceSmallerThan(int price){
+        log.info("Attempting to find products with price smaller or equal than {}", price);
+        return productRepository.findProductsByPriceLessThanEqual(price);
+    }
+
+    public Product findProductByName(String name){
+
+        Optional<Product> productOptional = productRepository.findProductByName(name);
+
+        if(productOptional.isPresent()){
+            log.info("Successfully retrieved product with name {}", name);
+            return productOptional.get();
+        }
+        throw new ProductAppException("Product not found!");
     }
 
 }
