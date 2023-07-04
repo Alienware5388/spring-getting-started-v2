@@ -7,7 +7,6 @@ import ro.sda.spring.model.Product;
 import ro.sda.spring.service.ProductService;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @Slf4j
@@ -75,12 +74,11 @@ public class ProductController {
         return products;
     }
 
-    @GetMapping("/product_with_name")
-    public Product findProductByName(@RequestParam String name){
-        log.info("Initializing get products by name flow.");
-        Product product = productService.findProductByName(name);
-        log.info("Products with a particular name have been retrieved successfully.");
-        return product;
-    }
+//    @GetMapping("/product_with_name")
+//    public Boolean findProductByName(@RequestParam String name) {
+//
+//        log.info("Initializing get products by name flow.");
+//        return productService.findProductByName(name);
+//    }
 
 }

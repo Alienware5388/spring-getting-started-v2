@@ -12,6 +12,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findProductsByPriceGreaterThanEqual(int price);
     List<Product> findProductsByPriceLessThanEqual(int price);
 
-    Optional<Product> findProductByName (String name);
+    Boolean findProductByName (String name);
 
 }

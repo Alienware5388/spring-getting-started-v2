@@ -20,11 +20,12 @@ public class ProductService {
     }
 
     public void addProduct(Product p) {
-       // if(productRepository.findAll()){
-        //    log.info("A product with the same name already exists in the database");
-        //} else
-        productRepository.save(p);
-        log.info("Product added to the database.");
+        if (productRepository.findProductByName(p.getName())) {
+            log.info("A product with the same name already exists in the database");
+        } else {
+            productRepository.save(p);
+            log.info("Product added to the database.");
+        }
     }
 
     public List<Product> findAllProducts() {
@@ -57,25 +58,25 @@ public class ProductService {
         productRepository.save(p);
     }
 
-    public List<Product> getProductsWithPriceGraterThan(int price){
+    public List<Product> getProductsWithPriceGraterThan(int price) {
         log.info("Attempting to find products with price greater or equal than {}", price);
         return productRepository.findProductsByPriceGreaterThanEqual(price);
     }
 
-    public List<Product> getProductsWithPriceSmallerThan(int price){
+    public List<Product> getProductsWithPriceSmallerThan(int price) {
         log.info("Attempting to find products with price smaller or equal than {}", price);
         return productRepository.findProductsByPriceLessThanEqual(price);
     }
 
-    public Product findProductByName(String name){
-
-        Optional<Product> productOptional = productRepository.findProductByName(name);
-
-        if(productOptional.isPresent()){
-            log.info("Successfully retrieved product with name {}", name);
-            return productOptional.get();
-        }
-        throw new ProductAppException("Product not found!");
-    }
+//    public boolean findProductByName(String name) {
+//
+//        Optional<Product> productOptional = productRepository.findProductByName(name);
+//
+//        if (productOptional.isPresent()) {
+//            log.info("Successfully retrieved product with name {}", name);
+//            return true;
+//        }
+//        throw new ProductAppException("Product not found!");
+//    }
 
 }
